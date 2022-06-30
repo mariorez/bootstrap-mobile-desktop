@@ -25,14 +25,13 @@ import ktx.app.Platform
 import system.InputSystem
 import system.MovementSystem
 import system.RenderSystem
-import kotlin.properties.Delegates
 
 class GameScreen(
     private val gameBoot: GameBoot
 ) : BaseScreen() {
     private lateinit var touchpad: Touchpad
-    private var player: Entity by Delegates.notNull()
-    private var world = World {
+    private val player: Entity
+    private val world = World {
         inject(batch)
         inject(camera)
         system<InputSystem>()
