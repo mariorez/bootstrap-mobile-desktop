@@ -1,4 +1,3 @@
-import com.badlogic.gdx.Application
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.Texture
@@ -23,7 +22,6 @@ class GameBoot : KtxGame<KtxScreen>() {
     }
 
     override fun create() {
-        Gdx.app.logLevel = Application.LOG_DEBUG // TODO: how to disable log in prod
 
         Gdx.input.inputProcessor = if (Platform.isMobile) InputMultiplexer()
         else InputMultiplexer(object : KtxInputAdapter {
