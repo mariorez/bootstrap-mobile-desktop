@@ -9,7 +9,7 @@ data class TransformComponent(
     var accelerator: Vector2 = Vector2(),
     var acceleration: Float = 0f,
     var deceleration: Float = 0f,
-    var maxSpeed: Float = 0f,
+    var maxSpeed: Float = 1000f,
     var rotation: Float = 0f,
 ) {
     fun setSpeed(speed: Float) {
