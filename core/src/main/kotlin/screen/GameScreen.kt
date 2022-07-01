@@ -90,8 +90,7 @@ class GameScreen(
 
         if (Platform.isMobile) {
             touchpad = Touchpad(5f, Touchpad.TouchpadStyle().apply {
-                background =
-                    TextureRegionDrawable(TextureRegion(TextureRegion(assets.get<Texture>("touchpad-bg.png"))))
+                background = TextureRegionDrawable(TextureRegion(assets.get<Texture>("touchpad-bg.png")))
                 knob = TextureRegionDrawable(TextureRegion(assets.get<Texture>("touchpad-knob.png")))
             })
 
@@ -110,13 +109,14 @@ class GameScreen(
     }
 
     override fun doAction(action: Action) {
-        val input = world.mapper<InputComponent>()[player]
+        val input = world.mapper<InputComponent>()
+        if (!input.contains(player)) return
         val isStarting = action.type == START
         when (action.name) {
-            Action.Name.UP -> input.up = isStarting
-            Action.Name.DOWN -> input.down = isStarting
-            Action.Name.LEFT -> input.left = isStarting
-            Action.Name.RIGHT -> input.right = isStarting
+            Action.Name.UP -> input[player].up = isStarting
+            Action.Name.DOWN -> input[player].down = isStarting
+            Action.Name.LEFT -> input[player].left = isStarting
+            Action.Name.RIGHT -> input[player].right = isStarting
         }
     }
 }
