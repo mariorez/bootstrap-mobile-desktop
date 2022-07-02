@@ -3,9 +3,9 @@ package screen
 import Action
 import Action.Type.START
 import BaseScreen
-import GameBoot
-import GameBoot.Companion.assets
-import GameBoot.Companion.gameSizes
+import Main
+import Main.Companion.assets
+import Main.Companion.gameSizes
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
@@ -27,7 +27,7 @@ import system.MovementSystem
 import system.RenderSystem
 
 class GameScreen(
-    private val gameBoot: GameBoot
+    private val main: Main
 ) : BaseScreen() {
     private lateinit var touchpad: Touchpad
     private val player: Entity
@@ -78,7 +78,7 @@ class GameScreen(
     private fun buildControls() {
 
         val restartButton = generateButton(assets["back-button.png"]).apply {
-            onTouchDown { gameBoot.setScreen<MenuScreen>() }
+            onTouchDown { main.setScreen<MenuScreen>() }
         }
 
         val table = Table().apply {

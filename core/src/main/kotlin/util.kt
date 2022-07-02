@@ -1,4 +1,4 @@
-import GameBoot.Companion.assets
+import Main.Companion.assets
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
