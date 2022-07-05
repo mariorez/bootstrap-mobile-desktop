@@ -31,7 +31,7 @@ class GameScreen(
 ) : BaseScreen() {
     private lateinit var touchpad: Touchpad
     private val player: Entity
-    private val game = world {
+    private val world = world {
         injectables {
             add(batch)
             add(camera)
@@ -46,7 +46,7 @@ class GameScreen(
     init {
         buildControls()
 
-        game.apply {
+        world.apply {
             player = entity {
                 val logoTexture = assets.get<Texture>("logo.png")
                 add<PlayerComponent>()
@@ -70,13 +70,13 @@ class GameScreen(
     }
 
     override fun render(delta: Float) {
-        game.update(delta)
+        world.update(delta)
         hudStage.draw()
     }
 
     override fun dispose() {
         super.dispose()
-        game.dispose()
+        world.dispose()
     }
 
     private fun buildControls() {
@@ -113,7 +113,7 @@ class GameScreen(
     }
 
     override fun doAction(action: Action) {
-        game.mapper<InputComponent>().getOrNull(player)?.let {
+        world.mapper<InputComponent>().getOrNull(player)?.let {
             val isStarting = action.type == START
             when (action.name) {
                 Action.Name.UP -> it.up = isStarting
