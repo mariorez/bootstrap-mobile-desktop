@@ -21,5 +21,5 @@ java -jar bootstrap-{version}.jar
 - **Gradle** Wrapper 7.4.2: https://gradle.org
 - **LigKTX** 11.11.0-rc1: https://libktx.github.io
 - **LigGDX** 1.11.0: https://libgdx.com
-- **Fleks ECS Library** 1.3-JVM: https://github.com/Quillraven/Fleks
+- **Fleks ECS Library** 1.4-JVM: https://github.com/Quillraven/Fleks
 - Project generated with **GDX Liftoff**: https://github.com/tommyettinger/gdx-liftoff
