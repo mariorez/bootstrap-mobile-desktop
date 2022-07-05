@@ -5,7 +5,7 @@ import Action.Type.START
 import BaseScreen
 import Main
 import Main.Companion.assets
-import Main.Companion.gameSizes
+import Main.Companion.sizes
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.github.quillraven.fleks.Entity
-import com.github.quillraven.fleks.World
+import com.github.quillraven.fleks.world
 import component.InputComponent
 import component.PlayerComponent
 import component.RenderComponent
@@ -31,25 +31,29 @@ class GameScreen(
 ) : BaseScreen() {
     private lateinit var touchpad: Touchpad
     private val player: Entity
-    private val world = World {
-        inject(batch)
-        inject(camera)
-        system<InputSystem>()
-        system<MovementSystem>()
-        system<RenderSystem>()
+    private val game = world {
+        injectables {
+            add(batch)
+            add(camera)
+        }
+        systems {
+            add<InputSystem>()
+            add<MovementSystem>()
+            add<RenderSystem>()
+        }
     }
 
     init {
         buildControls()
 
-        world.apply {
+        game.apply {
             player = entity {
                 val logoTexture = assets.get<Texture>("logo.png")
                 add<PlayerComponent>()
                 add<InputComponent>()
                 add<TransformComponent> {
-                    position.x = gameSizes.worldWidthF() / 2 - logoTexture.width / 2
-                    position.y = gameSizes.worldHeightF() / 2 - logoTexture.height / 2
+                    position.x = sizes.worldWidthF() / 2 - logoTexture.width / 2
+                    position.y = sizes.worldHeightF() / 2 - logoTexture.height / 2
                     acceleration = 400f
                     deceleration = 250f
                     maxSpeed = 150f
@@ -66,13 +70,13 @@ class GameScreen(
     }
 
     override fun render(delta: Float) {
-        world.update(delta)
+        game.update(delta)
         hudStage.draw()
     }
 
     override fun dispose() {
         super.dispose()
-        world.dispose()
+        game.dispose()
     }
 
     private fun buildControls() {
@@ -109,14 +113,14 @@ class GameScreen(
     }
 
     override fun doAction(action: Action) {
-        val input = world.mapper<InputComponent>()
-        if (!input.contains(player)) return
-        val isStarting = action.type == START
-        when (action.name) {
-            Action.Name.UP -> input[player].up = isStarting
-            Action.Name.DOWN -> input[player].down = isStarting
-            Action.Name.LEFT -> input[player].left = isStarting
-            Action.Name.RIGHT -> input[player].right = isStarting
+        game.mapper<InputComponent>().getOrNull(player)?.let {
+            val isStarting = action.type == START
+            when (action.name) {
+                Action.Name.UP -> it.up = isStarting
+                Action.Name.DOWN -> it.down = isStarting
+                Action.Name.LEFT -> it.left = isStarting
+                Action.Name.RIGHT -> it.right = isStarting
+            }
         }
     }
 }

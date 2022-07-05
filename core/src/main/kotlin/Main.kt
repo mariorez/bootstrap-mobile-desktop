@@ -21,7 +21,7 @@ class Main : KtxGame<KtxScreen>() {
 
     companion object {
         val assets = AssetStorage()
-        val gameSizes = GameSizes(
+        val sizes = Sizes(
             windowWidth = 960,
             windowHeight = 540
         )

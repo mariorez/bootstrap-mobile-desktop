@@ -3,7 +3,7 @@
 package mariorez.studio.lwjgl3
 
 import Main
-import Main.Companion.gameSizes
+import Main.Companion.sizes
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 
@@ -11,7 +11,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 fun main() {
     Lwjgl3Application(Main(), Lwjgl3ApplicationConfiguration().apply {
         setTitle("GameDev Bootstrap")
-        setWindowedMode(gameSizes.windowWidth, gameSizes.windowHeight)
+        setWindowedMode(sizes.windowWidth, sizes.windowHeight)
         setWindowIcon(*(arrayOf(128, 64, 32, 16).map { "libgdx$it.png" }.toTypedArray()))
     })
 }

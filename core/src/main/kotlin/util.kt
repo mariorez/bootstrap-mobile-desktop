@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import kotlin.math.max
 
-data class GameSizes(
+data class Sizes(
     var windowWidth: Int,
     var windowHeight: Int,
     var worldWidth: Int = windowWidth,
