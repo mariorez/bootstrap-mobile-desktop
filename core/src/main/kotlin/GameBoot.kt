@@ -17,7 +17,7 @@ import ktx.async.KtxAsync
 import screen.GameScreen
 import screen.MenuScreen
 
-class Main : KtxGame<KtxScreen>() {
+class GameBoot : KtxGame<KtxScreen>() {
 
     companion object {
         val assets = AssetStorage()
