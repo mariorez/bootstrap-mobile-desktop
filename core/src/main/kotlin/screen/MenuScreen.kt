@@ -1,6 +1,5 @@
 package screen
 
-import Action
 import BaseScreen
 import GameBoot
 import GameBoot.Companion.assets
@@ -34,6 +33,4 @@ class MenuScreen(
     override fun render(delta: Float) {
         hudStage.draw()
     }
-
-    override fun doAction(action: Action) {}
 }

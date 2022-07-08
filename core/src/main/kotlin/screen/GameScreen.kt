@@ -103,9 +103,13 @@ class GameScreen(
                 add(touchpad).expandY().expandX().left().bottom()
             }
         } else {
+            registerAction(Input.Keys.W, Action.Name.UP)
             registerAction(Input.Keys.UP, Action.Name.UP)
+            registerAction(Input.Keys.S, Action.Name.DOWN)
             registerAction(Input.Keys.DOWN, Action.Name.DOWN)
+            registerAction(Input.Keys.A, Action.Name.LEFT)
             registerAction(Input.Keys.LEFT, Action.Name.LEFT)
+            registerAction(Input.Keys.D, Action.Name.RIGHT)
             registerAction(Input.Keys.RIGHT, Action.Name.RIGHT)
         }
 
@@ -120,7 +124,10 @@ class GameScreen(
                 Action.Name.DOWN -> it.down = isStarting
                 Action.Name.LEFT -> it.left = isStarting
                 Action.Name.RIGHT -> it.right = isStarting
+                else -> {}
             }
         }
+
+        super.doAction(action)
     }
 }
