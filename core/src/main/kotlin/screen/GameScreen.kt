@@ -51,15 +51,13 @@ class GameScreen(
                 val logoTexture = assets.get<Texture>("logo.png")
                 add<PlayerComponent>()
                 add<InputComponent>()
+                add<RenderComponent> { sprite = Sprite(logoTexture) }
                 add<TransformComponent> {
                     position.x = sizes.worldWidthF() / 2 - logoTexture.width / 2
                     position.y = sizes.worldHeightF() / 2 - logoTexture.height / 2
                     acceleration = 400f
                     deceleration = 250f
                     maxSpeed = 150f
-                }
-                add<RenderComponent> {
-                    sprite = Sprite(logoTexture)
                 }
             }
 

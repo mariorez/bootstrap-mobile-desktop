@@ -15,10 +15,10 @@ import ktx.graphics.use
 class RenderSystem(
     private val batch: SpriteBatch,
     private val camera: OrthographicCamera,
-    private val transformMapper: ComponentMapper<TransformComponent>,
-    private val renderMapper: ComponentMapper<RenderComponent>,
+    private val transformMap: ComponentMapper<TransformComponent>,
+    private val renderMap: ComponentMapper<RenderComponent>,
 ) : IteratingSystem(
-    compareEntity { entA, entB -> transformMapper[entA].zIndex.compareTo(transformMapper[entB].zIndex) }
+    compareEntity { entA, entB -> transformMap[entA].zIndex.compareTo(transformMap[entB].zIndex) }
 ) {
 
     override fun onTick() {
@@ -28,10 +28,10 @@ class RenderSystem(
     }
 
     override fun onTickEntity(entity: Entity) {
-        renderMapper[entity].apply {
+        renderMap[entity].apply {
             rendered = true
             sprite.apply {
-                transformMapper[entity].also {
+                transformMap[entity].also {
                     rotation = it.rotation
                     setBounds(it.position.x, it.position.y, width, height)
                 }

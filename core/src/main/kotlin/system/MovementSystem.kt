@@ -10,11 +10,11 @@ import component.TransformComponent
 
 @AllOf([PlayerComponent::class])
 class MovementSystem(
-    private val transform: ComponentMapper<TransformComponent>
+    private val transformMap: ComponentMapper<TransformComponent>
 ) : IteratingSystem() {
 
     override fun onTickEntity(entity: Entity) {
-        transform[entity].apply {
+        transformMap[entity].apply {
             // apply acceleration
             velocity.add(
                 accelerator.x * deltaTime,

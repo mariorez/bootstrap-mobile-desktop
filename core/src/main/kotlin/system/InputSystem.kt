@@ -14,8 +14,8 @@ import kotlin.properties.Delegates
 
 @AllOf([PlayerComponent::class])
 class InputSystem(
-    private val inputMapper: ComponentMapper<InputComponent>,
-    private val transformMapper: ComponentMapper<TransformComponent>,
+    private val inputMap: ComponentMapper<InputComponent>,
+    private val transformMap: ComponentMapper<TransformComponent>,
 ) : IteratingSystem() {
 
     var touchpad: Touchpad by Delegates.notNull()
@@ -26,16 +26,16 @@ class InputSystem(
         if (Platform.isMobile) {
             direction.set(touchpad.knobPercentX, touchpad.knobPercentY)
             if (direction.len() > 0) {
-                transformMapper[entity].apply {
+                transformMap[entity].apply {
                     speedUp.set(acceleration, 0f).also { speed ->
                         accelerator.add(speed.setAngleDeg(direction.angleDeg()))
                     }
                 }
             }
         } else {
-            inputMapper[entity].also { playerInput ->
+            inputMap[entity].also { playerInput ->
                 if (playerInput.isMoving) {
-                    transformMapper[entity].apply {
+                    transformMap[entity].apply {
                         speedUp.set(acceleration, 0f).also { speed ->
                             if (playerInput.right) accelerator.add(speed.setAngleDeg(0f))
                             if (playerInput.up) accelerator.add(speed.setAngleDeg(90f))
